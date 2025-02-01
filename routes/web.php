@@ -1,13 +1,20 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Roles\RoleController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes();
+
+//Roles
+Route::resource('roles', RoleController::class)
+    ->parameters(['role' => 'role'])
+    ->names('role');
 
 //Language Translation
 Route::get('index/{locale}', [HomeController::class, 'lang']);

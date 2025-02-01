@@ -183,6 +183,7 @@
                 <button type="button" class="btn header-item noti-icon" id="page-header-notifications-dropdown-v"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="icon-sm" data-eva="bell-outline"></i>
+                    <span class="noti-dot horny-looser bg-danger rounded-pill">4</span>
                     {{-- @if ($count = Auth::user()->unreadNotifications->count())
                         <span class="noti-dot horny-looser bg-danger rounded-pill">{{ $count }}</span>
                     @endif --}}
@@ -200,8 +201,8 @@
                         </div>
                     </div>
                     <div class="page-header-notifications-dropdown-v fuck" data-simplebar style="max-height: 250px;">
-                        {{-- @foreach (Auth::user()->unreadNotifications as $unreadNotification) --}}
-                            {{-- <a href="{{ route('markAsReadNotification', $unreadNotification->id) }}" data-id="{{ $unreadNotification->id }}" id="red-marked" name="red-marked" class="text-reset notification-item"> --}}
+                        {{-- @foreach (Auth::user()->unreadNotifications as $unreadNotification)
+                            <a href="{{ route('markAsReadNotification', $unreadNotification->id) }}" data-id="{{ $unreadNotification->id }}" id="red-marked" name="red-marked" class="text-reset notification-item">
 
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
@@ -209,17 +210,31 @@
                                             alt="user-pic">
                                     </div>
                                     <div class="flex-grow-1">
-                                        {{-- <h6 class="mb-1">{{ $unreadNotification->data['subject'] }}</h6> --}}
+                                        <h6 class="mb-1">{{ $unreadNotification->data['subject'] }}</h6>
                                         <div class="font-size-13 text-muted">
-                                            {{-- <p class="mb-1">{{ Str::limit($unreadNotification->data['body'], 40,'...') }}</p>
-                                            <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span>{{ $unreadNotification->created_at->diffForHumans() }}</span></p> --}}
+                                            <p class="mb-1">{{ Str::limit($unreadNotification->data['body'], 40,'...') }}</p>
+                                            <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span>{{ $unreadNotification->created_at->diffForHumans() }}</span></p>
                                         </div>
                                     </div>
                                 </div>
-                            {{-- </a> --}}
-                        {{-- @endforeach --}}
+                            </a>
+                        @endforeach --}}
+                        <a href="#!" class="text-reset notification-item">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 me-3">
+                                    <img src="assets/images/users/avatar-3.jpg" class="rounded-circle avatar-sm" alt="user-pic">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">James Lemire</h6>
+                                    <div class="font-size-13 text-muted">
+                                        <p class="mb-1">It will seem like simplified English.</p>
+                                        <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span>1 hour ago</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
 
-                        {{-- <a href="#!" class="text-reset notification-item">
+                        <a href="#!" class="text-reset notification-item">
                             <div class="d-flex">
                                 <div class="flex-shrink-0 avatar-sm me-3">
                                     <span class="avatar-title bg-primary rounded-circle font-size-16">
@@ -270,7 +285,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </a> --}}
+                        </a>
                     </div>
                     <div class="p-2 border-top d-grid">
                         <a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="javascript:void(0)">
