@@ -39,17 +39,17 @@
                 <li class="menu-title" data-key="t-menu">@lang('translation.Administration')</li>
 
                 {{-- Users --}}
-                {{-- <li>
+                <li>
                     <a href="javascript: void(0);">
                         <i class="icon nav-icon" data-eva="people-outline"></i>
                         <span class="menu-item" data-key="t-dashboards">@lang('translation.Users')</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{ route('client.index') }}" data-key="t-clients">@lang('translation.Clients')</a>
-                        </li>
+                        {{-- <li><a href="{{ route('client.index') }}" data-key="t-clients">@lang('translation.Clients')</a>
+                        </li> --}}
                         <li><a href="{{ route('role.index') }}" data-key="t-roles">@lang('translation.Roles')</a></li>
                     </ul>
-                </li> --}}
+                </li>
 
                 <li class="menu-title" data-key="t-menu">@lang('translation.Menu')</li>
 
