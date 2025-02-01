@@ -179,13 +179,13 @@
 
 
             <div class="dropdown d-inline-block">
-                <input type="hidden" class="form-control required" id="unread-notifications" name="unread-notifications" value="{{ Auth::user()->unreadNotifications->count() }}">
+                {{-- <input type="hidden" class="form-control required" id="unread-notifications" name="unread-notifications" value="{{ Auth::user()->unreadNotifications->count() }}"> --}}
                 <button type="button" class="btn header-item noti-icon" id="page-header-notifications-dropdown-v"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="icon-sm" data-eva="bell-outline"></i>
-                    @if ($count = Auth::user()->unreadNotifications->count())
+                    {{-- @if ($count = Auth::user()->unreadNotifications->count())
                         <span class="noti-dot horny-looser bg-danger rounded-pill">{{ $count }}</span>
-                    @endif
+                    @endif --}}
                 </button>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
                     aria-labelledby="page-header-notifications-dropdown-v">
@@ -200,8 +200,8 @@
                         </div>
                     </div>
                     <div class="page-header-notifications-dropdown-v fuck" data-simplebar style="max-height: 250px;">
-                        @foreach (Auth::user()->unreadNotifications as $unreadNotification)
-                            <a href="{{ route('markAsReadNotification', $unreadNotification->id) }}" data-id="{{ $unreadNotification->id }}" id="red-marked" name="red-marked" class="text-reset notification-item">
+                        {{-- @foreach (Auth::user()->unreadNotifications as $unreadNotification) --}}
+                            {{-- <a href="{{ route('markAsReadNotification', $unreadNotification->id) }}" data-id="{{ $unreadNotification->id }}" id="red-marked" name="red-marked" class="text-reset notification-item"> --}}
 
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
@@ -209,15 +209,15 @@
                                             alt="user-pic">
                                     </div>
                                     <div class="flex-grow-1">
-                                        <h6 class="mb-1">{{ $unreadNotification->data['subject'] }}</h6>
+                                        {{-- <h6 class="mb-1">{{ $unreadNotification->data['subject'] }}</h6> --}}
                                         <div class="font-size-13 text-muted">
-                                            <p class="mb-1">{{ Str::limit($unreadNotification->data['body'], 40,'...') }}</p>
-                                            <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span>{{ $unreadNotification->created_at->diffForHumans() }}</span></p>
+                                            {{-- <p class="mb-1">{{ Str::limit($unreadNotification->data['body'], 40,'...') }}</p>
+                                            <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span>{{ $unreadNotification->created_at->diffForHumans() }}</span></p> --}}
                                         </div>
                                     </div>
                                 </div>
-                            </a>
-                        @endforeach
+                            {{-- </a> --}}
+                        {{-- @endforeach --}}
 
                         {{-- <a href="#!" class="text-reset notification-item">
                             <div class="d-flex">
