@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Roles;
 
+
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RoleRequest extends FormRequest
@@ -22,7 +24,12 @@ class RoleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => [
+                'required',
+                Rule::unique('roles')->ignore($this->route('role'))
+            ],
+            'display_name' => 'nullable',
+            'status' => 'required',
         ];
     }
 }

@@ -1,135 +1,44 @@
 @extends('layouts.master')
-@section('title') @lang('translation.Advanced_Table') @endsection
-@section('css')
-<link rel="stylesheet" href="{{ URL::asset('assets/libs/gridjs/gridjs.min.css') }}">
-@endsection
+@section('title') @lang('translation.Basic_Tables') @endsection
 @section('content')
-@section('pagetitle')Advanced Tables @endsection
 
 
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">GridJs Table</h4>
-            </div><!-- end card header -->
-            <div class="card-body">
-                <div id="table-gridjs"></div>
-            </div>
-            <!-- end card body -->
-        </div>
-        <!-- end card -->
-    </div>
-    <!-- end col -->
-</div>
-<!-- end row -->
+@section('pagetitle')
+{{ __('Roles List') }}
+@endsection
 
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Pagination</h4>
-            </div><!-- end card header -->
-            <div class="card-body">
-                <div id="table-pagination"></div>
+                <h4 class="card-title">{{ __('Role List') }}</h4>
             </div>
-            <!-- end card body -->
-        </div>
-        <!-- end card -->
-    </div>
-    <!-- end col -->
-</div>
-<!-- end row -->
+            <div class="card-body">
+                <p class="card-title-desc">
+                    @if ($session = Session::get('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="mdi mdi-check-all me-2"></i>
+                        {{ $session }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
+                </p>
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Search</h4>
-            </div><!-- end card header -->
-            <div class="card-body">
-                <div id="table-search"></div>
-            </div>
-            <!-- end card body -->
-        </div>
-        <!-- end card -->
-    </div>
-    <!-- end col -->
-</div>
-<!-- end row -->
+                <div class="table-responsive">
+                    {{ $dataTable->table() }}
+                </div>
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Sorting</h4>
-            </div><!-- end card header -->
-            <div class="card-body">
-                <div id="table-sorting"></div>
             </div>
-            <!-- end card body -->
         </div>
-        <!-- end card -->
     </div>
-    <!-- end col -->
-</div>
-<!-- end row -->
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Loading State</h4>
-            </div><!-- end card header -->
-            <div class="card-body">
-                <div id="table-loading-state"></div>
-            </div>
-            <!-- end card body -->
-        </div>
-        <!-- end card -->
-    </div>
-    <!-- end col -->
-</div>
-<!-- end row -->
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Fixed Header</h4>
-            </div><!-- end card header -->
-            <div class="card-body">
-                <div id="table-fixed-header"></div>
-            </div>
-            <!-- end card body -->
-        </div>
-        <!-- end card -->
-    </div>
-    <!-- end col -->
-</div>
-<!-- end row -->
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Hidden Columns</h4>
-            </div><!-- end card header -->
-            <div class="card-body">
-                <div id="table-hidden-column"></div>
-            </div>
-            <!-- end card body -->
-        </div>
-        <!-- end card -->
-    </div>
-    <!-- end col -->
 </div>
 <!-- end row -->
 
 @endsection
 @section('script')
-<script src="{{ URL::asset('assets/libs/gridjs/gridjs.min.js') }}"></script>
-<script src="{{ URL::asset('assets/js/pages/gridjs.init.js') }}"></script>
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
+<script src="/vendor/datatables/buttons.server-side.js"></script>
+{{ $dataTable->scripts(attributes: ['type' => 'module']) }}
 @endsection

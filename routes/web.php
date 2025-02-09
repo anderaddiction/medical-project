@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Roles\RoleController;
+use App\Models\Roles\Role;
 
 Route::get('/', function () {
     return view('welcome');
@@ -12,6 +13,14 @@ Route::get('/', function () {
 Auth::routes();
 
 //Roles
+// Roles Trashed
+Route::get('roles/trashed', [RoleController::class, 'trashed'])
+    ->name('role.trashed');
+
+// Roles Restore
+Route::post('/roles/restore/{id}', [RoleController::class, 'restore'])->name('role.restore');
+
+// Role Resource
 Route::resource('roles', RoleController::class)
     ->parameters(['role' => 'role'])
     ->names('role');

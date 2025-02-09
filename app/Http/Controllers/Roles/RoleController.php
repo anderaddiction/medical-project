@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Roles;
 
 use App\Models\Roles\Role;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
+use App\DataTables\Roles\RoleDataTable;
+use App\DataTables\Roles\RoleTrashedDataTable;
 use App\Http\Requests\Roles\RoleRequest;
 
 class RoleController extends Controller
@@ -12,9 +16,9 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(RoleDataTable $dataTable)
     {
-        return view('auth.roles.index');
+        return $dataTable->render('auth.roles.index');
     }
 
     /**
@@ -33,7 +37,14 @@ class RoleController extends Controller
      */
     public function store(RoleRequest $request)
     {
-        //
+        $role = Role::create(
+            $request->validated()
+                +   ['code' => uniqueCode(8, 'number')]
+                +   ['slug' => Str::slug($request->name)]
+                +   ['note' => $request->note ? null : 'N/A']
+        );
+
+        return redirect()->route('role.create')->with('success', 'Role created successfully');
     }
 
     /**
@@ -41,7 +52,9 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        //
+        return view('auth.roles.show', [
+            'role' => $role
+        ]);
     }
 
     /**
@@ -49,7 +62,9 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        return view('auth.roles.edit', [
+            'role' => $role
+        ]);
     }
 
     /**
@@ -57,7 +72,13 @@ class RoleController extends Controller
      */
     public function update(RoleRequest $request, Role $role)
     {
-        //
+        $role->update(
+            $request->validated()
+                +   ['slug' => Str::slug($request->name)]
+                +   ['note' => $request->note ? null : 'N/A']
+        );
+
+        return redirect()->route('role.edit', ['role' => $role])->with('success', 'Role updated successfully');
     }
 
     /**
@@ -65,6 +86,27 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        $role->delete();
+
+        return redirect()->route('role.index')->with('success', 'Role deleted successfully');
+    }
+
+    /**
+     * Display a listing resource from trash.
+     */
+    public function trashed(RoleTrashedDataTable $dataTable)
+    {
+        return $dataTable->render('auth.roles.trashed');
+    }
+
+    /**
+     * Restore the specified resource from trash.
+     */
+    public function restore($id)
+    {
+        $role = Role::withTrashed()->find($id);
+        $role->restore();
+
+        return redirect()->route('role.trashed')->with('success', 'Role restored successfully');
     }
 }
