@@ -38,6 +38,24 @@
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title" data-key="t-menu">@lang('translation.Administration')</li>
 
+                {{-- Administration --}}
+                <li>
+                    <a href="javascript: void(0);">
+                        <i class="icon nav-icon" data-eva="lock-outline"></i>
+                        <span class="menu-item" data-key="t-education">@lang('translation.Administration')</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="true">
+                        <a href="{{ route('education.index') }}">
+                            <i class="icon nav-icon" data-eva="edit-2-outline"></i>
+                            <span class="menu-item" data-key="t-education">@lang('translation.Education')</span>
+                        </a>
+                        <a href="{{ route('document.index') }}">
+                            <i class="icon nav-icon" data-eva="edit-2-outline"></i>
+                            <span class="menu-item" data-key="t-document">@lang('translation.Dcoumentation')</span>
+                        </a>
+                    </ul>
+                </li>
+
                 {{-- Users --}}
                 <li>
                     <a href="javascript: void(0);">
@@ -50,6 +68,8 @@
                         <li><a href="{{ route('role.index') }}" data-key="t-roles">@lang('translation.Roles')</a></li>
                     </ul>
                 </li>
+
+
 
                 <li class="menu-title" data-key="t-menu">@lang('translation.Menu')</li>
 
