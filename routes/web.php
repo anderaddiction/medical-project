@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Documents\DocumentTypeController;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Roles\RoleController;
 use App\Http\Controllers\Documents\HistoryController;
+use App\Http\Controllers\Documents\DocumentController;
 use App\Http\Controllers\Education\EducationController;
 
 Route::get('/', function () {
@@ -16,14 +17,14 @@ Auth::routes();
 
 // Document Types
 // Document Types Trashed
-Route::get('document_type/trashed', [DocumentTypeController::class, 'trashed'])
+Route::get('documents/trashed', [DocumentController::class, 'trashed'])
     ->name('document.trashed');
 
 // Document Types Restore
-Route::post('/document_type/restore/{id}', [DocumentTypeController::class, 'restore'])->name('document.restore');
+Route::post('/documents/restore/{id}', [DocumentController::class, 'restore'])->name('document.restore');
 
 // Document Types Resource
-Route::resource('document_type', DocumentTypeController::class)
+Route::resource('documents', DocumentController::class)
     ->parameters(['document' => 'document'])
     ->names('document');
 

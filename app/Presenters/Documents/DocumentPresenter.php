@@ -2,58 +2,57 @@
 
 namespace App\Presenters\Documents;
 
-use App\Models\Documents\DocumentType;
-use App\Models\Documents\History;
+use App\Models\Documents\Document;
 use Illuminate\Support\Carbon;
 
-class DocumentTypePresenter
+class DocumentPresenter
 {
 
-    protected $document_type;
+    protected $document;
 
-    function __construct(DocumentType $document_type)
+    function __construct(Document $document)
     {
-        $this->document_type = $document_type;
+        $this->document = $document;
     }
 
     public function code()
     {
-        return $this->document_type->code;
+        return $this->document->code;
     }
 
     public function name()
     {
-        return $this->document_type->name;
+        return $this->document->name;
     }
 
     public function display_name()
     {
-        return $this->document_type->display_name;
+        return $this->document->display_name;
     }
 
     public function note()
     {
-        return $this->document_type->note;
+        return $this->document->note;
     }
 
     public function slug()
     {
-        return $this->document_type->slug;
+        return $this->document->slug;
     }
 
     public function created_at()
     {
-        return Carbon::parse($this->document_type->created_at)->diffForHumans();
+        return Carbon::parse($this->document->created_at)->diffForHumans();
     }
 
     public function updated_at()
     {
-        return Carbon::parse($this->document_type->updated_at)->diffForHumans();
+        return Carbon::parse($this->document->updated_at)->diffForHumans();
     }
 
     public function status()
     {
-        if ($this->document_type->status == 1) {
+        if ($this->document->status == 1) {
             return '<i class="fas fa-check-circle text-success fa-lg"></i>';
         } else {
             return '<i class="far fa-times-circle text-danger fa-lg"></i>';
@@ -68,9 +67,9 @@ class DocumentTypePresenter
                         <i class="bx bx-dots-vertical-rounded"></i>
                     </a>
                     <div class="dropdown-menu" style="">
-                        <a class="dropdown-item" href="' . route('role.edit', $this->document_type) . '">' . __('Edit') . '</a>
-                        <a class="dropdown-item" href="' . route('role.show', $this->document_type) . '">' . __('Show') . '</a>
-                        <form action="' . route('role.destroy', $this->document_type) . '" method="POST">
+                        <a class="dropdown-item" href="' . route('document.edit', $this->document) . '">' . __('Edit') . '</a>
+                        <a class="dropdown-item" href="' . route('document.show', $this->document) . '">' . __('Show') . '</a>
+                        <form action="' . route('document.destroy', $this->document) . '" method="POST">
                             ' . @csrf_field() . '
                             ' . @method_field('DELETE') . '
                             <button class="dropdown-item" type="submit">' . __('Delete') . '</a>
@@ -88,7 +87,7 @@ class DocumentTypePresenter
                         <i class="bx bx-dots-vertical-rounded"></i>
                     </a>
                     <div class="dropdown-menu" style="">
-                        <form action="' . route('role.restore', $this->document_type->id) . '" method="POST">
+                        <form action="' . route('document.restore', $this->document->id) . '" method="POST">
                             ' . @csrf_field() . '
                             <button class="dropdown-item" type="submit">' . __('Restore') . '</a>
                         </form>

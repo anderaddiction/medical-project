@@ -2,6 +2,7 @@
 
 namespace App\Models\Users\Patients;
 
+use App\Models\Documents\Document;
 use App\Models\Documents\DocumentType;
 use App\Models\Education\Education;
 use Laravel\Ui\Presets\Preset;
@@ -23,7 +24,7 @@ class Patient extends Model
 
     public function document_type()
     {
-        return $this->belongsTo(DocumentType::class,  'document_type_id', 'id');
+        return $this->belongsTo(Document::class,  'document_type_id', 'id');
     }
 
     public function education()

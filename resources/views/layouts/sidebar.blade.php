@@ -51,7 +51,7 @@
                         </a>
                         <a href="{{ route('document.index') }}">
                             <i class="icon nav-icon" data-eva="edit-2-outline"></i>
-                            <span class="menu-item" data-key="t-document">@lang('translation.Dcoumentation')</span>
+                            <span class="menu-item" data-key="t-document">@lang('translation.Documents')</span>
                         </a>
                     </ul>
                 </li>

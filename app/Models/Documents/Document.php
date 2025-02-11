@@ -2,13 +2,13 @@
 
 namespace App\Models\Documents;
 
-use App\Http\Controllers\Users\Patients\Patient;
+use App\Models\Users\Patients\Patient;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Presenters\Documents\DocumentTypePresenter;
+use App\Presenters\Documents\DocumentPresenter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class DocumentType extends Model
+class Document extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -26,6 +26,6 @@ class DocumentType extends Model
 
     public function present()
     {
-        return new DocumentTypePresenter($this);
+        return new DocumentPresenter($this);
     }
 }

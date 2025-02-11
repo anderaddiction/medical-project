@@ -2,16 +2,17 @@
 
 namespace App\Http\Requests\Documents;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class DocumentTypeRequest extends FormRequest
+class DocumentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,11 @@ class DocumentTypeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => [
+                'required',
+                Rule::unique('documents')->ignore($this->route('document'))
+            ],
+            'status' => 'required',
         ];
     }
 }

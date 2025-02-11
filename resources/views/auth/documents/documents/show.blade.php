@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title') @lang('translation.Basic_Tables') @endsection
+@section('title') @lang('translation.Documents') @endsection
 @section('content')
 
 
@@ -13,11 +13,11 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">{{ $medical_history->present()->name() }} Role</h4>
+                        <h4 class="card-title">{{ $document->present()->name() }} Document</h4>
                     </div>
                     <div class="card-body">
-                        <a href="{{ route('history.index') }}">
-                            <h5 class="font-size-14 mb-4"><i class="mdi mdi-arrow-right text-primary me-1"></i> {{ __('Return to role list') }}
+                        <a href="{{ route('document.index') }}">
+                            <h5 class="font-size-14 mb-4"><i class="mdi mdi-arrow-right text-primary me-1"></i> {{ __('Return to documents list') }}
                             </h5>
                         </a>
                         <div class="table-responsive">
@@ -37,15 +37,15 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th scope="row">{{ $medical_history->id }}</th>
-                                        <td>{{ $medical_history->present()->code() }}</td>
-                                        <td>{{ $medical_history->present()->name() }}</td>
-                                        <td>{{ $medical_history->present()->display_name() }}</td>
-                                        <td>{!! $medical_history->present()->status() !!}</td>
-                                        <td>{{ $medical_history->present()->note() }}</td>
-                                        <td>{{ $medical_history->present()->slug() }}</td>
-                                        <td>{{ $medical_history->present()->created_at() }}</td>
-                                        <td>{{ $medical_history->present()->updated_at() }}</td>
+                                        <th scope="row">{{ $document->id }}</th>
+                                        <td>{{ $document->present()->code() }}</td>
+                                        <td>{{ $document->present()->name() }}</td>
+                                        <td>{{ $document->present()->display_name() }}</td>
+                                        <td>{!! $document->present()->status() !!}</td>
+                                        <td>{{ $document->present()->note() }}</td>
+                                        <td>{{ $document->present()->slug() }}</td>
+                                        <td>{{ $document->present()->created_at() }}</td>
+                                        <td>{{ $document->present()->updated_at() }}</td>
                                     </tr>
                                 </tbody>
                             </table>

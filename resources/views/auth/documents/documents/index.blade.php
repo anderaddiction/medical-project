@@ -1,17 +1,17 @@
 @extends('layouts.master')
-@section('title') @lang('translation.Basic_Tables') @endsection
+@section('title') @lang('translation.Documents') @endsection
 @section('content')
 
 
 @section('pagetitle')
-{{ __('Medical History List') }}
+{{ __('Documents List') }}
 @endsection
 
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">{{ __('Medical History List') }}</h4>
+                <h4 class="card-title">{{ __('Documents List') }}</h4>
             </div>
             <div class="card-body">
                 <p class="card-title-desc">

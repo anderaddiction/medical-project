@@ -1,23 +1,23 @@
 @extends('layouts.master')
-@section('title') @lang('translation.Form_Elements') @endsection
+@section('title') @lang('translation.Documents') @endsection
 @section('content')
 
 
-@section('pagetitle'){{ __('Medical Histories Form') }} @endsection
+@section('pagetitle'){{ __('Documents Form') }} @endsection
 
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title mb-0">{{ __('Edit Medical History') }}</h4>
+                <h4 class="card-title mb-0">{{ __('Edit Document') }}</h4>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="mt-4 mt-xl-0">
-                            <a href="{{ route('history.index') }}">
+                            <a href="{{ route('document.index') }}">
                                 <h5 class="font-size-14 mb-4"><i class="mdi mdi-arrow-right text-primary me-1"></i> {{
-                                    __('Return to medical history list') }}</h5>
+                                    __('Return to documents list') }}</h5>
                             </a>
                             @if ($session = Session::get('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -27,9 +27,9 @@
                                     aria-label="Close"></button>
                             </div>
                             @endif
-                            <form action="{{ route('history.update', $role) }}" method="POST" id="register-form" rol="form">
+                            <form action="{{ route('document.update', $document) }}" method="POST" id="register-form" rol="form">
                                 @method('PUT')
-                                @include('auth.medical_histories._form', ['btnText' => __('Update')])
+                                @include('auth.documents.documents._form', ['btnText' => __('Update')])
                             </form>
                         </div>
                     </div>
