@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('place_of_birth');
             $table->integer('marital_status');
             $table->integer('sex');
-            $table->foreignId('document_type_id')->constrained('document_types');
+            $table->foreignId('document_type_id')->constrained('documents');
             $table->string('document_number')->unique();
             $table->string('ocupation');
             $table->foreignId('education_level_id')->constrained('educations')->nullable();
