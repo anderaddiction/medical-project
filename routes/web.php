@@ -2,18 +2,26 @@
 
 
 use Illuminate\Support\Facades\Auth;
+use App\Models\Territories\Continent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Roles\RoleController;
 use App\Http\Controllers\Documents\HistoryController;
 use App\Http\Controllers\Documents\DocumentController;
 use App\Http\Controllers\Education\EducationController;
+use App\Http\Controllers\Territories\ContinentController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes();
+
+// Territories
+// Continents
+Route::resource('territories/continents', ContinentController::class)
+    ->parameters(['continent' => 'continent'])
+    ->names('continent');
 
 // Document Types
 // Document Types Trashed
