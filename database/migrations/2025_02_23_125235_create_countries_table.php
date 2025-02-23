@@ -11,23 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('continents', function (Blueprint $table) {
+        Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
             $table->string('name');
             $table->integer('status')->default(1);
             $table->string('slug')->unique();
             $table->text('note')->nullable();
+            $table->foreignId('continent_id')->constrained('continents');
             $table->softDeletes();
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('continents');
+        Schema::dropIfExists('countries');
     }
 };

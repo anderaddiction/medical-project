@@ -2,12 +2,14 @@
 
 namespace App\Models\Territories;
 
+use App\Models\Territories\Continent;
+use App\Presenters\Territories\CountryPresenter;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Presenters\Territories\ContinentPresenter;
 
-class Continent extends Model
+
+class Country extends Model
 {
     use SoftDeletes, HasFactory;
 
@@ -20,14 +22,14 @@ class Continent extends Model
 
     //Relationships
 
-    public function countries(){
-        return $this->hasMany(Country::class, 'continent_id', 'id');
+    public function continents(){
+        return $this->belongsTo(Continent::class, 'continent_id');
     }
 
     //Presenter
 
     public function present(){
-        return new ContinentPresenter($this);
+        return new CountryPresenter($this);
         
     }
 

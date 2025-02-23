@@ -1,17 +1,17 @@
 @extends('layouts.master')
-@section('title') @lang('translation.Continents') @endsection
+@section('title') @lang('translation.Countries') @endsection
 @section('content')
 
 
 @section('pagetitle')
-{{ __('Continents List') }}
+{{ __('Countries List') }}
 @endsection
 
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">{{ __('Continents List') }}</h4>
+                <h4 class="card-title">{{ __('Countries List') }}</h4>
             </div>
             <div class="card-body">
                 <p class="card-title-desc">
