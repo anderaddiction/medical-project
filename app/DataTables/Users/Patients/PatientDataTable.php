@@ -2,7 +2,8 @@
 
 namespace App\DataTables\Users\Patients;
 
-use App\Models\Patient;
+
+use App\Models\Users\Patients\Patient;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
