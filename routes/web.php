@@ -6,10 +6,12 @@ use App\Http\Controllers\Documents\HistoryController;
 use App\Http\Controllers\Education\EducationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Roles\RoleController;
+use App\Http\Controllers\Territories\AppointmentController;
 use App\Http\Controllers\Territories\ContinentController;
 use App\Http\Controllers\Territories\CountryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -19,6 +21,10 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::resource('appointments', AppointmentController::class)
+    ->parameters(['appointment' => 'appointment'])
+    ->names('appointment');
 
 // Territories
 // Continents
