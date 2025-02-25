@@ -29,7 +29,7 @@ class DocumentTrashedDataTable extends DataTable
             ->addColumn('status', function ($education) {
                 return $education->present()->status();
             })
-            ->setRowId('action', 'status');
+            ->rawColumns(['action', 'status']);
     }
 
     /**

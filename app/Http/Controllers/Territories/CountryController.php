@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Territories;
 
-use App\DataTables\Territories\countries\CountryDataTable;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Territories\CountryRequest;
-use App\Models\Territories\Continent;
-use App\Models\Territories\Country;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Models\Territories\Country;
+use App\Http\Controllers\Controller;
+use App\Models\Territories\Continent;
+use App\Http\Requests\Territories\CountryRequest;
+use App\DataTables\Territories\Countries\CountryDataTable;
 
 class CountryController extends Controller
 {
@@ -20,7 +21,6 @@ class CountryController extends Controller
         return $dataTable->render('auth.territories.countries.index', [
             'dataTable' => $dataTable
         ]);
-        
     }
 
     /**
@@ -28,14 +28,12 @@ class CountryController extends Controller
      */
     public function create()
     {
-        $country = new Country(); 
+        $country = new Country();
         $continents  = Continent::orderBy('name', 'ASC')->pluck('name', 'id');
         return view('auth.territories.countries.create', [
             'country' => $country,
             'continents' => $continents
         ]);
-
-
     }
 
     /**
@@ -43,10 +41,11 @@ class CountryController extends Controller
      */
     public function store(CountryRequest $request)
     {
-        Country::create($request->validated()
-            + ['code' => uniqueCode(8,'number')]
-            + ['slug' => Str::slug($request->name)]
-            + ['note' => $request->note ? null : 'N/A']
+        Country::create(
+            $request->validated()
+                + ['code' => uniqueCode(8, 'number')]
+                + ['slug' => Str::slug($request->name)]
+                + ['note' => $request->note ? null : 'N/A']
         );
 
         return redirect()->route('country.create')->with('success', __('Document created successfully'));
@@ -59,7 +58,7 @@ class CountryController extends Controller
     {
         return view('auth.territories.countries.show', [
             'country' => $country
-        
+
         ]);
     }
 
@@ -80,9 +79,10 @@ class CountryController extends Controller
      */
     public function update(CountryRequest $request, Country $country)
     {
-        $country->update($request->validated()
-            + ['slug' => Str::slug($request->name)]
-            + ['note' => $request->note ? null : 'N/A']
+        $country->update(
+            $request->validated()
+                + ['slug' => Str::slug($request->name)]
+                + ['note' => $request->note ? null : 'N/A']
         );
 
         return redirect()->route('country.edit', ['country' => $country])->with('success', __('Document edited successfully'));

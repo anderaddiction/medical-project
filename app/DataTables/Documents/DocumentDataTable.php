@@ -26,7 +26,10 @@ class DocumentDataTable extends DataTable
             ->addColumn('action', function ($education) {
                 return $education->present()->action();
             })
-            ->setRowId('action');
+            ->addColumn('status', function ($education) {
+                return $education->present()->status();
+            })
+            ->rawColumns(['action', 'status']);
     }
 
     /**

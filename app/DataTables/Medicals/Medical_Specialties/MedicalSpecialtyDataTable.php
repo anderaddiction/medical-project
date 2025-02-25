@@ -28,7 +28,7 @@ class MedicalSpecialtyDataTable extends DataTable
             ->addColumn('status', function ($specialty) {
                 return $specialty->present()->status();
             })
-            ->setRowId('action', 'status');
+            ->rawColumns(['action', 'status']);
     }
 
     /**
