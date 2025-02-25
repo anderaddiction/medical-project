@@ -285,5 +285,9 @@ return [
     "Gallery" => 'Galería',
     "Payment_Gateway" => "Pasarela de Pagos",
     "Services" => "Servicios",
-    "Permissions" => "Permisos"
+    "Permissions" => "Permisos",
+    "Medicals" => "Medicas",
+    "Specialties" => "Especialidades",
+    "Histories" => "Historiales",
+    "Education" => "Educación",
 ];

@@ -5,6 +5,7 @@ use App\Http\Controllers\Documents\DocumentController;
 use App\Http\Controllers\Documents\HistoryController;
 use App\Http\Controllers\Education\EducationController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Medicals\Medical_Specialties\MedicalSpecialtyController;
 use App\Http\Controllers\Roles\RoleController;
 use App\Http\Controllers\Territories\ContinentController;
 use App\Http\Controllers\Territories\CountryController;
@@ -58,18 +59,38 @@ Route::resource('education', EducationController::class)
     ->names('education');
 
 
-// Medical Histories
-// Medical Histories Trashed
-Route::get('medical_histories/trashed', [HistoryController::class, 'trashed'])
-    ->name('history.trashed');
 
-// Medical Histories Restore
-Route::post('/medical_histories/restore/{id}', [HistoryController::class, 'restore'])->name('history.restore');
 
-// Medical Histories Resource
-Route::resource('medical_histories', HistoryController::class)
-    ->parameters(['history' => 'history'])
-    ->names('history');
+Route::prefix('medicals')->group(
+    function () {
+        // Medical Specialties
+        // Medical Specialties Trashed
+        Route::get('specialties/trashed', [MedicalSpecialtyController::class, 'trashed'])
+            ->name('specialty.trashed');
+
+        // Medical Specialties Restore
+        Route::post('specialties/restore/{id}', [MedicalSpecialtyController::class, 'restore'])->name('specialty.restore');
+
+        // Medical Specialties Resource
+        Route::resource('specialties', MedicalSpecialtyController::class)
+            ->parameters(['specialty' => 'specialty'])
+            ->names('specialty');
+
+        // Medical Histories
+        // Medical Histories Trashed
+        Route::get('histories/trashed', [HistoryController::class, 'trashed'])
+            ->name('history.trashed');
+
+        // Medical Histories Restore
+        Route::post('/histories/restore/{id}', [HistoryController::class, 'restore'])->name('history.restore');
+
+        // Medical Histories Resource
+        Route::resource('histories', HistoryController::class)
+            ->parameters(['history' => 'history'])
+            ->names('history');
+    }
+);
+
 
 //Roles
 // Roles Trashed
@@ -83,6 +104,8 @@ Route::post('/roles/restore/{id}', [RoleController::class, 'restore'])->name('ro
 Route::resource('roles', RoleController::class)
     ->parameters(['role' => 'role'])
     ->names('role');
+
+
 
 //Language Translation
 Route::get('index/{locale}', [HomeController::class, 'lang']);
