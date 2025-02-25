@@ -42,7 +42,7 @@
                 <li>
                     <a href="javascript: void(0);">
                         <i class="icon nav-icon" data-eva="lock-outline"></i>
-                        <span class="menu-item" data-key="t-education">@lang('translation.Administration')</span>
+                        <span class="menu-item" data-key="t-administration">@lang('translation.Administration')</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <a href="{{ route('education.index') }}">
@@ -50,9 +50,36 @@
                             <span class="menu-item" data-key="t-education">@lang('translation.Education')</span>
                         </a>
                         <a href="{{ route('document.index') }}">
-                            <i class="icon nav-icon" data-eva="edit-2-outline"></i>
+                            <i class="icon nav-icon" data-eva="book-open-outline"></i>
                             <span class="menu-item" data-key="t-document">@lang('translation.Documents')</span>
                         </a>
+
+                        {{-- Medicals --}}
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="icon nav-icon" data-eva="lock-outline"></i>
+                                <span class="menu-item" data-key="t-medicals">@lang('translation.Medicals')</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="true">
+                                <a href="{{ route('specialty.index') }}">
+                                    <i class="icon nav-icon" data-eva="heart-outline"></i>
+                                    <span class="menu-item" data-key="t-specialties">@lang('translation.Specialties')</span>
+                                </a>
+                                <a href="{{ route('history.index') }}">
+                                    <i class="icon nav-icon" data-eva="book-open-outline"></i>
+                                    <span class="menu-item" data-key="t-histories">@lang('translation.Histories')</span>
+                                </a>
+                            </ul>
+                        </li>
+
+
+
+
+
+
+
+
+
                     </ul>
                 </li>
 
