@@ -29,7 +29,7 @@ class RoleTrashedDataTable extends DataTable
             ->addColumn('status', function ($role) {
                 return $role->present()->status();
             })
-            ->setRowId('action', 'status');
+            ->rawColumns(['action', 'status']);
     }
 
     /**
