@@ -24,7 +24,7 @@ class Patient extends Model
 
     public function document_type()
     {
-        return $this->belongsTo(Document::class,  'document_type_id', 'id');
+        return $this->belongsTo(Document::class,  'document_id', 'id');
     }
 
     public function education()

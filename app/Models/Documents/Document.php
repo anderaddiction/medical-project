@@ -21,7 +21,7 @@ class Document extends Model
 
     public function documents()
     {
-        return $this->hasMany(Patient::class, 'document_type_id', 'id');
+        return $this->hasMany(Patient::class, 'document_id', 'id');
     }
 
     public function present()
