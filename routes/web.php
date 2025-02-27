@@ -7,10 +7,12 @@ use App\Http\Controllers\Education\EducationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Medicals\Medical_Specialties\MedicalSpecialtyController;
 use App\Http\Controllers\Roles\RoleController;
+use App\Http\Controllers\Appointments\AppointmentController;
 use App\Http\Controllers\Territories\ContinentController;
 use App\Http\Controllers\Territories\CountryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -20,6 +22,14 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::get('/auth/med_histories/form-wizard', function () {
+    return view('auth.med_histories.form-wizard'); // Asegúrate de que el archivo está en resources/views/
+});
+
+Route::resource('appointments', AppointmentController::class)
+    ->parameters(['appointment' => 'appointment'])
+    ->names('appointment');
 
 // Territories
 // Continents

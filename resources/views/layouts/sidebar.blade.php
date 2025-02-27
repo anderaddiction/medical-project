@@ -83,6 +83,21 @@
                     </ul>
                 </li>
 
+                {{-- Appointments --}}
+
+                <li>
+                    <a href="javascript: void(0);">
+                        <i class="icon nav-icon" data-eva="lock-outline"></i>
+                        <span class="menu-item" data-key="t-appointments">@lang('translation.Appointments')</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="true">
+                        <a href="{{ route('appointment.index') }}">
+                            <i class="icon nav-icon" data-eva="edit-2-outline"></i>
+                            <span class="menu-item" data-key="t-appointment">@lang('translation.Appointment')</span>
+                        </a>
+                    </ul>
+                </li>
+
                 {{-- Territories --}}
 
                 <li>

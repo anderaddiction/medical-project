@@ -26,7 +26,7 @@ return new class extends Migration
             $table->foreignId('document_id')->constrained('documents');
             $table->string('document_number')->unique();
             $table->string('ocupation');
-            $table->foreignId('education_level_id')->constrained('educations')->nullable();
+           // $table->foreignId('education_level_id')->constrained('educations')->nullable();
             $table->string('institution')->nullable();
             $table->string('affiliated_entity');
             $table->string('type_of_link');

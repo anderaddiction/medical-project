@@ -24,7 +24,7 @@ class PatientDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', 'patient.action')
-            ->rawColumns('id');
+            ->rawColumns(['id']);
     }
 
     /**
