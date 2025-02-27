@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Territories;
+namespace App\Http\Controllers\Appointments;
 
 use App\DataTables\Appointments\AppointmentDataTable;
-use App\Http\Requests\Appointments\AppointmentRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Appointments\AppointmentRequest;
 use App\Models\Appointments\Appointment;
+use App\Models\Medicals\Medical_Specialties\Medical_Specialty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class AppointmentController extends Controller
@@ -28,19 +30,27 @@ class AppointmentController extends Controller
     public function create()
     {
         $appointment = new Appointment(); 
+        $specialities  = Medical_Specialty::orderBy('name', 'ASC')->pluck('name', 'id');
         return view('auth.appointments.create', [
-            'appointment' => $appointment
+            'appointment' => $appointment,
+            'specialities' => $specialities
         ]);
     }
+    
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(AppointmentRequest $request)
     {
+
+        dd($request->all());
+         
+        $userId = Auth::check() ? Auth::user()->id : null;
         Appointment::create($request->validated()
             + ['code' => uniqueCode(8,'number')]
             + ['slug' => Str::slug($request->name)]
+            + ['responsable_id'=> $userId]
             + ['note' => $request->note ? null : 'N/A']
         );
 
@@ -52,7 +62,7 @@ class AppointmentController extends Controller
      */
     public function show(Appointment $appointment)
     {
-        return view('auth.territories.appointments.show', [
+        return view('auth.appointments.show', [
             'appointment' => $appointment
         
         ]);
@@ -63,8 +73,10 @@ class AppointmentController extends Controller
      */
     public function edit(Appointment $appointment)
     {
-        return view('auth.territories.appointments.edit', [
-            'appointment' => $appointment
+        $speciality  = Medical_Specialty::orderBy('name', 'ASC')->pluck('name', 'id');
+        return view('auth.appointments.edit', [
+            'appointment' => $appointment,
+            'medical_specialty' => $speciality
         
         ]);
     }

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\DataTables\Education;
+namespace App\DataTables\Medicals\Medical_Specialties;
 
-use App\Models\Education\Education;
+use App\Models\Medicals\Medical_Specialties\Medical_Specialty;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class EducationTrashedDataTable extends DataTable
+class MedicalSpecialtyDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -22,11 +22,11 @@ class EducationTrashedDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', function ($education) {
-                return $education->present()->trash_action();
+            ->addColumn('action', function ($specialty) {
+                return $specialty->present()->action();
             })
-            ->addColumn('status', function ($education) {
-                return $education->present()->status();
+            ->addColumn('status', function ($specialty) {
+                return $specialty->present()->status();
             })
             ->rawColumns(['action', 'status']);
     }
@@ -34,9 +34,9 @@ class EducationTrashedDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(Education $model): QueryBuilder
+    public function query(Medical_Specialty $model): QueryBuilder
     {
-        return $model->newQuery()->onlyTrashed();
+        return $model->newQuery();
     }
 
     /**
@@ -45,19 +45,29 @@ class EducationTrashedDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('educationtrashed-table')
+            ->setTableId('datatable')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            //->dom('Bfrtip')
+            ->dom('Bfrtip')
             ->orderBy(1)
             ->selectStyleSingle()
             ->buttons([
-                Button::make('excel'),
-                Button::make('csv'),
-                Button::make('pdf'),
-                Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload')
+                Button::make(__('create'))
+                    ->text('<i class="fa fa-edit" title="' . __('Create') . '"></i>'),
+                Button::make('')
+                    ->text('<i class="fa fa-trash" title="' . __('Trash') . '"></i>')
+                    ->addClass('btn btn-delete-all')
+                    ->action("window.location = '" . route('specialty.trashed') . "';"),
+                Button::make(__('excel'))
+                    ->text('<i class="fa fa-file-excel" title="' . __('Excel') . '"></i>'),
+                Button::make(__('csv'))
+                    ->text('<i class="fa fa-file-csv" title="' . __('CSV') . '"></i>'),
+                Button::make(__('pdf'))
+                    ->text('<i class="fa fa-file-pdf" title="' . __('PDF') . '"></i>'),
+                Button::make(__('print'))
+                    ->text('<i class="fa fa-print" title="' . __('Print') . '"></i>'),
+                Button::make(__('reset'))
+                    ->text('<i class="fa fa-redo" title="' . __('Reset') . '"></i>'),
             ]);
     }
 
@@ -71,7 +81,6 @@ class EducationTrashedDataTable extends DataTable
             Column::make(__('name')),
             Column::make(__('note')),
             Column::make(__('status')),
-            Column::make(__('slug')),
             Column::computed(__('action'))
                 ->exportable(false)
                 ->printable(false)
@@ -85,6 +94,6 @@ class EducationTrashedDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'EducationTrashed_' . date('YmdHis');
+        return 'MedicalSpecialty_' . date('YmdHis');
     }
 }

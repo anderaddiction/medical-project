@@ -26,13 +26,13 @@ class AppointmentDataTable extends DataTable
             ->addColumn('action', function($appointment){
                 return $appointment->present()->action();
             })
-            ->addColumn('continent', function($appointment){
-                return $appointment->present()->continent();
+            ->addColumn('specialty', function($appointment){
+                return $appointment->present()->medic_specialty();
             })
             ->addColumn('status', function($appointment){
                 return $appointment->present()->status();
             })
-            ->setRowId('action', 'status', 'continent');
+            ->rawColumns(['action', 'status', 'specialty']);
     }
 
     /**
@@ -85,7 +85,7 @@ class AppointmentDataTable extends DataTable
             Column::make('name'),
             Column::make('status'),
             Column::make('slug'),
-            Column::make('continent'),
+            Column::make('speciality'),
             Column::make('note'),
             Column::computed('action')
             ->exportable(false)

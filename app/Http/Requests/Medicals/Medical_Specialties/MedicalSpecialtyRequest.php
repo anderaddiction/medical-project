@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Appointments;
+namespace App\Http\Requests\Medicals\Medical_Specialties;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
-class AppointmentRequest extends FormRequest
+class MedicalSpecialtyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,7 @@ class AppointmentRequest extends FormRequest
         return [
             'name' => [
                 'required',
-                Rule::unique('appointments')->ignore($this->route('appointment'))
-            ],
-            'specialty_id' => [
-                'required',
-                Rule::unique('appointments')->ignore($this->route('appointment'))
+                Rule::unique('medical_specialties')->ignore($this->route('specialty'))
             ],
             'status' => 'required',
         ];

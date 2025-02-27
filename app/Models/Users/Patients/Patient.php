@@ -2,6 +2,7 @@
 
 namespace App\Models\Users\Patients;
 
+use App\Models\Appointments\Appointment;
 use App\Models\Documents\Document;
 use App\Models\Documents\DocumentType;
 use App\Models\Education\Education;
@@ -24,12 +25,16 @@ class Patient extends Model
 
     public function document_type()
     {
-        return $this->belongsTo(Document::class,  'document_type_id', 'id');
+        return $this->belongsTo(Document::class,  'document_id', 'id');
     }
 
     public function education()
     {
         return $this->belongsTo(Education::class, 'education_level_id', 'id');
+    }
+    public function appointment()
+    {
+        return $this->hasMany(Appointment::class, 'name', 'id');
     }
 
     public function present()

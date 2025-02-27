@@ -2,6 +2,8 @@
 
 namespace App\Models\Appointments;
 
+use App\Models\Medicals\Medical_Specialties\Medical_Specialty;
+use App\Models\Users\Patients\Patient;
 use App\Presenters\Appointments\AppointmentPresenter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +21,16 @@ class Appointment extends Model
     }
 
     //Relationships
+
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class, 'patient');
+    }
+
+    public function speciality()
+    {
+        return $this->belongsTo(Medical_Specialty::class, 'specialty_id');
+    }
 
 
     //Presenter

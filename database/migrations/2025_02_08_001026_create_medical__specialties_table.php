@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('appointments', function (Blueprint $table) {
+        Schema::create('medical_specialties', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
-            $table->string('name');
-            $table->string('patient');
-            $table->foreignId('specialty_id')->constrained('medical_specialties');
+            $table->string('name')->unique();
             $table->integer('status')->default(1);
             $table->string('slug')->unique();
-            $table->integer('responsable_id');
             $table->text('note')->nullable();
             $table->softDeletes();
             $table->timestamps();
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('appointments');
+        Schema::dropIfExists('medical__specialties');
     }
 };

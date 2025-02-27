@@ -22,11 +22,11 @@ return new class extends Migration
             $table->date('birthdate');
             $table->string('place_of_birth');
             $table->integer('marital_status');
-            $table->integer('sex');
-            $table->foreignId('document_type_id')->constrained('documents');
+            $table->char('gender');
+            $table->foreignId('document_id')->constrained('documents');
             $table->string('document_number')->unique();
             $table->string('ocupation');
-            $table->foreignId('education_level_id')->constrained('educations')->nullable();
+           // $table->foreignId('education_level_id')->constrained('educations')->nullable();
             $table->string('institution')->nullable();
             $table->string('affiliated_entity');
             $table->string('type_of_link');

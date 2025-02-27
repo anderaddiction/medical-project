@@ -1,19 +1,18 @@
 <?php
 
-namespace App\DataTables\Roles;
+namespace App\DataTables\Medicals\Medical_Specialties;
 
-use App\Models\Roles\Role;
-use App\Models\RoleTrashed;
+use App\Models\Medicals\Medical_Specialties\Medical_Specialty;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
-class RoleTrashedDataTable extends DataTable
+class MedicalSpecialtyTrashedDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,11 +22,11 @@ class RoleTrashedDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', function ($role) {
-                return $role->present()->trash_action();
+            ->addColumn('action', function ($specialty) {
+                return $specialty->present()->trash_action();
             })
-            ->addColumn('status', function ($role) {
-                return $role->present()->status();
+            ->addColumn('status', function ($specialty) {
+                return $specialty->present()->status();
             })
             ->rawColumns(['action', 'status']);
     }
@@ -35,7 +34,7 @@ class RoleTrashedDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(Role $model): QueryBuilder
+    public function query(Medical_Specialty $model): QueryBuilder
     {
         return $model->newQuery()->onlyTrashed();
     }
@@ -46,7 +45,7 @@ class RoleTrashedDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('roletrashed-table')
+            ->setTableId('medicalspecialtytrashed-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
@@ -70,7 +69,6 @@ class RoleTrashedDataTable extends DataTable
         return [
             Column::make(__('code')),
             Column::make(__('name')),
-            Column::make(__('display_name')),
             Column::make(__('note')),
             Column::make(__('status')),
             Column::computed(__('action'))
@@ -86,6 +84,6 @@ class RoleTrashedDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'RoleTrashed_' . date('YmdHis');
+        return 'MedicalSpecialtyTrashed_' . date('YmdHis');
     }
 }
