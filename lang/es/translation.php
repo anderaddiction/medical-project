@@ -290,4 +290,13 @@ return [
     "Specialties" => "Especialidades",
     "Histories" => "Historiales",
     "Education" => "Educación",
+    "Patients" => "Pacientes",
+    "Appointments" => "Citas",
+    "Consultations" => "Consultas",
+    "Surgeries" => "Cirugías",
+    "Prescriptions" => "Recetas",
+    "Invoices" => "Facturas",
+    "Payments" => "Pagos",
+    "Laboratories" => "Laboratorios",
+    "Disabilities" => "Discapacidades",
 ];
