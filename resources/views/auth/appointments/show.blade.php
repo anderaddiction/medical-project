@@ -30,7 +30,6 @@
                                         <th>{{ __('Status') }}</th>
                                         <th>{{ __('Note') }}</th>
                                         <th>{{ __('Slug') }}</th>
-                                        <th>{{ __('Continent') }}</th>
                                         <th>{{ __('Created at') }}</th>
                                         <th>{{ __('Updated at') }}</th>
                                     </tr>
@@ -43,7 +42,6 @@
                                         <td>{!! $appointment->present()->status() !!}</td>
                                         <td>{{ $appointment->present()->note() }}</td>
                                         <td>{{ $appointment->present()->slug() }}</td>
-                                        <td>{{ $appointment->present()->continent() }}</td>
                                         <td>{{ $appointment->present()->created_at() }}</td>
                                         <td>{{ $appointment->present()->updated_at() }}</td>
                                     </tr>

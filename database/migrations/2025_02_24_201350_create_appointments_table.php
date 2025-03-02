@@ -15,11 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->string('name');
-            $table->string('patient');
+            $table->foreignId('patient_id')->constrained('patients');
             $table->foreignId('specialty_id')->constrained('medical_specialties');
+            $table->date('date');
+            $table->string('start_hour');
+            $table->string('end_hour');
             $table->integer('status')->default(1);
             $table->string('slug')->unique();
-            $table->integer('responsable_id');
+            $table->foreignId('responsible_id')->constrained('users');
             $table->text('note')->nullable();
             $table->softDeletes();
             $table->timestamps();

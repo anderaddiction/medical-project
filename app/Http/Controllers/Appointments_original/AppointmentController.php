@@ -21,7 +21,6 @@ class AppointmentController extends Controller
         return $dataTable->render('auth.appointments.index', [
             'dataTable' => $dataTable
         ]);
-        
     }
 
     /**
@@ -29,14 +28,14 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        $appointment = new Appointment(); 
-        $specialities  = Medical_Specialty::orderBy('name', 'ASC')->pluck('name', 'id');
+        $appointment = new Appointment();
+        $specialties  = Medical_Specialty::orderBy('name', 'ASC')->pluck('name', 'id');
         return view('auth.appointments.create', [
             'appointment' => $appointment,
-            'specialities' => $specialities
+            'specialties' => $specialties
         ]);
     }
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -44,17 +43,19 @@ class AppointmentController extends Controller
     public function store(AppointmentRequest $request)
     {
 
-        dd($request->all());
-         
-        $userId = Auth::check() ? Auth::user()->id : null;
-        Appointment::create($request->validated()
-            + ['code' => uniqueCode(8,'number')]
-            + ['slug' => Str::slug($request->name)]
-            + ['responsable_id'=> $userId]
-            + ['note' => $request->note ? null : 'N/A']
-        );
+        return 'hola ';
+        // dd($request);
 
-        return redirect()->route('appointment.create')->with('success', __('Document created successfully'));
+        // $userId = Auth::check() ? Auth::user()->id : null;
+        // Appointment::create(
+        //     $request->validated()
+        //         + ['code' => uniqueCode(8, 'number')]
+        //         + ['slug' => Str::slug($request->name)]
+        //         + ['responsable_id' => $userId]
+        //         + ['note' => $request->note ? null : 'N/A']
+        // );
+
+        // return redirect()->route('appointment.create')->with('success', __('Document created successfully'));
     }
 
     /**
@@ -64,7 +65,7 @@ class AppointmentController extends Controller
     {
         return view('auth.appointments.show', [
             'appointment' => $appointment
-        
+
         ]);
     }
 
@@ -77,7 +78,7 @@ class AppointmentController extends Controller
         return view('auth.appointments.edit', [
             'appointment' => $appointment,
             'medical_specialty' => $speciality
-        
+
         ]);
     }
 
@@ -86,9 +87,10 @@ class AppointmentController extends Controller
      */
     public function update(AppointmentRequest $request, Appointment $appointment)
     {
-        $appointment->update($request->validated()
-            + ['slug' => Str::slug($request->name)]
-            + ['note' => $request->note ? null : 'N/A']
+        $appointment->update(
+            $request->validated()
+                + ['slug' => Str::slug($request->name)]
+                + ['note' => $request->note ? null : 'N/A']
         );
 
         return redirect()->route('appointment.edit', ['appointment' => $appointment])->with('success', __('Document edited successfully'));
@@ -103,4 +105,3 @@ class AppointmentController extends Controller
         return redirect()->route('appointment.index')->with('success', __('Document deleted successfully'));
     }
 }
-

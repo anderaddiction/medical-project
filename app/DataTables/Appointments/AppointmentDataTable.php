@@ -23,16 +23,13 @@ class AppointmentDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', function($appointment){
+            ->addColumn('action', function ($appointment) {
                 return $appointment->present()->action();
             })
-            ->addColumn('specialty', function($appointment){
-                return $appointment->present()->medic_specialty();
-            })
-            ->addColumn('status', function($appointment){
+            ->addColumn('status', function ($appointment) {
                 return $appointment->present()->status();
             })
-            ->rawColumns(['action', 'status', 'specialty']);
+            ->rawColumns(['action', 'status']);
     }
 
     /**
@@ -40,7 +37,7 @@ class AppointmentDataTable extends DataTable
      */
     public function query(Appointment $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->with('specialty')->with('patient');
     }
 
     /**
@@ -49,30 +46,30 @@ class AppointmentDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-        ->setTableId('datatable')
-        ->columns($this->getColumns())
-        ->minifiedAjax()
-        ->dom('Bfrtip')
-        ->orderBy(1)
-        ->selectStyleSingle()
-        ->buttons([
-            Button::make(__('create'))
-                ->text('<i class="fa fa-edit" title="' . __('Create') . '"></i>'),
-            Button::make('')
-                ->text('<i class="fa fa-trash" title="' . __('Trash') . '"></i>')
-                ->addClass('btn btn-delete-all')
-                ->action("window.location = '" . route('education.trashed') . "';"),
-            Button::make(__('excel'))
-                ->text('<i class="fa fa-file-excel" title="' . __('Excel') . '"></i>'),
-            Button::make(__('csv'))
-                ->text('<i class="fa fa-file-csv" title="' . __('CSV') . '"></i>'),
-            Button::make(__('pdf'))
-                ->text('<i class="fa fa-file-pdf" title="' . __('PDF') . '"></i>'),
-            Button::make(__('print'))
-                ->text('<i class="fa fa-print" title="' . __('Print') . '"></i>'),
-            Button::make(__('reset'))
-                ->text('<i class="fa fa-redo" title="' . __('Reset') . '"></i>'),
-        ]);
+            ->setTableId('datatable')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->orderBy(1)
+            ->selectStyleSingle()
+            ->buttons([
+                Button::make(__('create'))
+                    ->text('<i class="fa fa-edit" title="' . __('Create') . '"></i>'),
+                Button::make('')
+                    ->text('<i class="fa fa-trash" title="' . __('Trash') . '"></i>')
+                    ->addClass('btn btn-delete-all')
+                    ->action("window.location = '" . route('education.trashed') . "';"),
+                Button::make(__('excel'))
+                    ->text('<i class="fa fa-file-excel" title="' . __('Excel') . '"></i>'),
+                Button::make(__('csv'))
+                    ->text('<i class="fa fa-file-csv" title="' . __('CSV') . '"></i>'),
+                Button::make(__('pdf'))
+                    ->text('<i class="fa fa-file-pdf" title="' . __('PDF') . '"></i>'),
+                Button::make(__('print'))
+                    ->text('<i class="fa fa-print" title="' . __('Print') . '"></i>'),
+                Button::make(__('reset'))
+                    ->text('<i class="fa fa-redo" title="' . __('Reset') . '"></i>'),
+            ]);
     }
 
     /**
@@ -85,13 +82,12 @@ class AppointmentDataTable extends DataTable
             Column::make('name'),
             Column::make('status'),
             Column::make('slug'),
-            Column::make('speciality'),
             Column::make('note'),
             Column::computed('action')
-            ->exportable(false)
-            ->printable(false)
-            ->width(60)
-            ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
         ];
     }
 

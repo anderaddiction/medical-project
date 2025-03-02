@@ -1,17 +1,17 @@
 <?php
 
 
-use App\Http\Controllers\Documents\DocumentController;
-use App\Http\Controllers\Documents\HistoryController;
-use App\Http\Controllers\Education\EducationController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Medicals\Medical_Specialties\MedicalSpecialtyController;
-use App\Http\Controllers\Roles\RoleController;
-use App\Http\Controllers\Appointments\AppointmentController;
-use App\Http\Controllers\Territories\ContinentController;
-use App\Http\Controllers\Territories\CountryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Roles\RoleController;
+use App\Http\Controllers\Documents\HistoryController;
+use App\Http\Controllers\Documents\DocumentController;
+use App\Http\Controllers\Education\EducationController;
+use App\Http\Controllers\Territories\CountryController;
+use App\Http\Controllers\Territories\ContinentController;
+use App\Http\Controllers\Medicals\Medical_Appointments\AppointmentController;
+use App\Http\Controllers\Medicals\Medical_Specialties\MedicalSpecialtyController;
 
 
 
