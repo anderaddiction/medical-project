@@ -1,0 +1,108 @@
+<?php
+
+namespace App\Http\Controllers\Medicals\Medical_Appointments;
+
+use Faker\Provider\Medical;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Appointments\Appointment;
+use App\DataTables\Appointments\AppointmentDataTable;
+use App\Http\Requests\Appointments\AppointmentRequest;
+use App\Models\Medicals\Medical_Specialties\Medical_Specialty;
+use App\Models\Users\Patients\Patient;
+
+class AppointmentController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(AppointmentDataTable $dataTable)
+    {
+        return $dataTable->render('auth.appointments.index', [
+            'dataTable' => $dataTable
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $appointment = new Appointment();
+        $specialties  = Medical_Specialty::orderBy('name', 'ASC')->pluck('name', 'id');
+        $patients  = Patient::orderBy('name', 'ASC')->pluck('name', 'id');
+        return view('auth.appointments.create', [
+            'appointment' => $appointment,
+            'specialties' => $specialties,
+            'patients' => $patients
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(AppointmentRequest $request)
+    {
+        $userId = Auth::check() ? Auth::user()->id : null;
+        Appointment::create(
+            $request->validated()
+                + ['code' => uniqueCode(8, 'number')]
+                + ['slug' => Str::slug($request->name)]
+                + ['responsible_id' => $userId]
+                + ['note' => $request->note ? null : 'N/A']
+        );
+
+        return redirect()->route('appointment.create')->with('success', __('Appointment created successfully'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Appointment $appointment)
+    {
+        return view('auth.appointments.show', [
+            'appointment' => $appointment
+
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Appointment $appointment)
+    {
+        $specialties  = Medical_Specialty::orderBy('name', 'ASC')->pluck('name', 'id');
+        $patients  = Patient::orderBy('name', 'ASC')->pluck('name', 'id');
+        return view('auth.appointments.edit', [
+            'appointment' => $appointment,
+            'specialties' => $specialties,
+            'patients' => $patients
+
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(AppointmentRequest $request, Appointment $appointment)
+    {
+        $appointment->update(
+            $request->validated()
+                + ['slug' => Str::slug($request->name)]
+                + ['note' => $request->note ? null : 'N/A']
+        );
+
+        return redirect()->route('appointment.edit', ['appointment' => $appointment])->with('success', __('Document edited successfully'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Appointment $appointment)
+    {
+        $appointment->delete();
+        return redirect()->route('appointment.index')->with('success', __('Document deleted successfully'));
+    }
+}
