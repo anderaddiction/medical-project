@@ -27,11 +27,13 @@ class AppointmentRequest extends FormRequest
                 'required',
                 Rule::unique('appointments')->ignore($this->route('appointment'))
             ],
-            'specialty_id' => [
-                'required',
-                Rule::unique('appointments')->ignore($this->route('appointment'))
-            ],
+            'specialty_id' => 'required',
+            'patient_id' => 'required',
             'status' => 'required',
+            'date' => 'required',
+            'start_hour' => 'required',
+            'end_hour' => 'required',
+            'note' => 'nullable'
         ];
     }
 }

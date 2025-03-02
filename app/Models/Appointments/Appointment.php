@@ -15,6 +15,8 @@ class Appointment extends Model
 
     protected $guarded = [];
 
+    protected $table = 'appointments';
+
     public function getRouteKeyName()
     {
         return 'slug';
@@ -24,20 +26,19 @@ class Appointment extends Model
 
     public function patient()
     {
-        return $this->belongsTo(Patient::class, 'patient');
+        return $this->belongsTo(Patient::class, 'patient_id', 'id');
     }
 
-    public function speciality()
+    public function specialty()
     {
-        return $this->belongsTo(Medical_Specialty::class, 'specialty_id');
+        return $this->belongsTo(Medical_Specialty::class, 'specialty_id', 'id');
     }
 
 
     //Presenter
 
-    public function present(){
+    public function present()
+    {
         return new AppointmentPresenter($this);
-        
     }
-
-} 
+}
