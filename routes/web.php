@@ -10,6 +10,7 @@ use App\Http\Controllers\Documents\DocumentController;
 use App\Http\Controllers\Education\EducationController;
 use App\Http\Controllers\Territories\CountryController;
 use App\Http\Controllers\Territories\ContinentController;
+use App\Http\Controllers\Medicals\Medical_Disabilities\DisabilityController;
 use App\Http\Controllers\Medicals\Medical_Appointments\AppointmentController;
 use App\Http\Controllers\Medicals\Medical_Specialties\MedicalSpecialtyController;
 
@@ -73,6 +74,19 @@ Route::resource('education', EducationController::class)
 
 Route::prefix('medicals')->group(
     function () {
+        // Medical Disabilities
+        // Medical Disabilities Trashed
+        Route::get('disabilities/trashed', [DisabilityController::class, 'trashed'])
+            ->name('disability.trashed');
+
+        // Medical Disabilities Restore
+        Route::post('disabilities/restore/{id}', [DisabilityController::class, 'restore'])->name('disability.restore');
+
+        // Medical Disabilities Resource
+        Route::resource('disabilities', DisabilityController::class)
+            ->parameters(['disability' => 'disability'])
+            ->names('disability');
+
         // Medical Specialties
         // Medical Specialties Trashed
         Route::get('specialties/trashed', [MedicalSpecialtyController::class, 'trashed'])

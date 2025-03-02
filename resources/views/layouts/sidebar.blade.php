@@ -61,6 +61,10 @@
                                 <span class="menu-item" data-key="t-medicals">@lang('translation.Medicals')</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="true">
+                                <a href="{{ route('disability.index') }}">
+                                    <i class="icon nav-icon" data-eva="book-open-outline"></i>
+                                    <span class="menu-item" data-key="t-disabilities">@lang('translation.Disabilities')</span>
+                                </a>
                                 <a href="{{ route('specialty.index') }}">
                                     <i class="icon nav-icon" data-eva="heart-outline"></i>
                                     <span class="menu-item" data-key="t-specialties">@lang('translation.Specialties')</span>
@@ -71,15 +75,6 @@
                                 </a>
                             </ul>
                         </li>
-
-
-
-
-
-
-
-
-
                     </ul>
                 </li>
 
