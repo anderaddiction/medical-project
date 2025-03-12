@@ -9,6 +9,22 @@
                 {{ $errors->first('name') }}
             </small>
         </div>
+        <div class="mb-3">
+            <label class="form-label" for="name">{{ __('Name') }}</label>
+            <input type="text" name="name" id="name" class="form-control required" placeholder="{{ __('Enter medical specialty') }}"
+                value="{{ old('name', $specialty->name) }}">
+            <small class="feedback text-danger">
+                {{ $errors->first('name') }}
+            </small>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="name">{{ __('Name') }}</label>
+            <input type="text" name="name" id="name" class="form-control required" placeholder="{{ __('Enter medical specialty') }}"
+                value="{{ old('name', $specialty->name) }}">
+            <small class="feedback text-danger">
+                {{ $errors->first('name') }}
+            </small>
+        </div>
     </div>
     <div class="col-md-6">
         <div class="mb-3">
